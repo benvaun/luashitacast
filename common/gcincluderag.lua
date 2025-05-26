@@ -3,11 +3,13 @@ local display_messages = true -- set to true if you want chat log messages to ap
 local kingdom_aketon = false
 local republic_aketon = false
 local federation_aketon = false
-local ducal_aketon = false
+local ducal_aketon = true
 
 local dream_boots = true
 local dream_mittens = true
 local skulkers_cape = false
+
+local eva_mst_cst_mitts = true
 
 local load_stylist = true -- set to true to just load stylist on game start. this is purely for convenience since putting it in scripts doesn't work.
 
@@ -300,7 +302,12 @@ function gcinclude.DoDefaultOverride(isMelee)
     if (gcdisplay.IdleSet == 'EarthRes') then gFunc.EquipSet('EarthRes') end
     if (gcdisplay.IdleSet == 'WindRes') then gFunc.EquipSet('WindRes') end
     if (gcdisplay.IdleSet == 'WaterRes') then gFunc.EquipSet('WaterRes') end
-    if (gcdisplay.IdleSet == 'Evasion') then gFunc.EquipSet('Evasion') end
+    if (gcdisplay.IdleSet == 'Evasion') then 
+		gFunc.EquipSet('Evasion') 
+		if (eva_mst_cst_mitts and conquest:GetOutsideControl()) then
+			gFunc.Equip('Hands', 'Mst.Cst. Mitts')
+		end
+	end
     if (gcdisplay.GetToggle('Kite') == true) then gFunc.EquipSet('Movement') end
 
     if (player.Status == 'Resting') then
