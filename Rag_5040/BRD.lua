@@ -1,7 +1,7 @@
 local profile = {}
 
-local fastCastValue = 0.04 -- Only include Fast Cast e.g. Loquacious Earring, Rostrum Pumps
-local fastCastValueSong = 0.37 -- Only include Song Spellcasting Time e.g. Minstrel's Ring, Sha'ir Manteel
+local fastCastValue = 0.02 -- Only include Fast Cast e.g. Loquacious Earring, Rostrum Pumps
+local fastCastValueSong = 0.48 -- Only include Song Spellcasting Time e.g. Minstrel's Ring, Sha'ir Manteel
 
 local ninSJMaxMP = nil -- The Max MP you have when /nin in your idle set
 local whmSJMaxMP = 188 -- The Max MP you have when /whm in your idle set
@@ -13,71 +13,51 @@ local displayheadOnAbility = true
 local sets = {
     Idle = {
         Main = 'Terra\'s Staff',
-        Range = 'Mythic Harp +1',
+        Range = 'Gjallarhorn',
+        Head = 'Genbu\'s Kabuto',
+        Neck = 'Jeweled Collar',
         Ear1 = 'Merman\'s Earring',
         Ear2 = 'Merman\'s Earring',
-        Head = 'displaced',
-        Body = 'Royal Cloak',
-        Hands = 'Dst. Mittens +1',
+        Body = 'Dalmatica',
+        Hands = 'Merman\'s Bangles',
         Ring1 = 'Merman\'s Ring',
-        Ring2 = 'Sattva Ring',
-        Back = 'Umbra Cape',
-        Waist = 'Scouter\'s Rope',
-        Legs = 'Dst. Subligar +1',
-        Feet = 'Dst. Leggings +1',
-        Neck = 'Jeweled Collar',
+        Ring2 = 'Merman\'s Ring',
+        Back = 'Hexerei Cape',
+        Waist = 'Forest Rope',
+        Legs = 'Brd. Cannions +1',
+        Feet = 'Rostrum Pumps',
     },
     IdleALT = {
         Main = 'Terra\'s Staff',
-        Range = 'Mythic Harp +1',
+        Range = 'Gjallarhorn',
+        Head = 'Genbu\'s Kabuto',
+        Neck = 'Jeweled Collar',
         Ear1 = 'Merman\'s Earring',
         Ear2 = 'Merman\'s Earring',
-        Head = 'Darksteel Cap +1',
-        Body = 'Dst. Harness +1',
-        Hands = 'Dst. Mittens +1',
+        Body = 'Dalmatica',
+        Hands = 'Merman\'s Bangles',
         Ring1 = 'Merman\'s Ring',
-        Ring2 = 'Sattva Ring',
-        Back = 'Umbra Cape',
-        Waist = 'Scouter\'s Rope',
-        Legs = 'Dst. Subligar +1',
-        Feet = 'Dst. Leggings +1',
-        Neck = 'Jeweled Collar',
+        Ring2 = 'Merman\'s Ring',
+        Back = 'Hexerei Cape',
+        Waist = 'Forest Rope',
+        Legs = 'Brd. Cannions +1',
+        Feet = 'Rostrum Pumps',
     },
     IdleMaxMP = {},
     Resting = {
         Main = 'Pluto\'s Staff',
-        Head = 'Hydra Beret',
-        Neck = 'Checkered Scarf',
-        Ear1 = 'Relaxing Earring',
-        Ear2 = 'Magnetic Earring',
-        Body = 'Mahatma hpl.',
-        Hands = 'Hydra Gloves',
-        Back = 'Errant Cape',
-        Legs = 'Hydra Brais',
-        Feet = 'Hydra Gaiters',
+        Body = 'Errant Hpl.',
     },
     Town = {
-        Range = 'Gjallarhorn',
-    },
+        Main = 'Mandau',
+		Sub = 'Genbu\'s Shield',
+		Head = 'Protective Specs.',
+	},
     Movement = {},
 
     DT = {},
     DTNight = {},
     MDT = { -- Shell IV provides 23% MDT
-        Main = 'Terra\'s Staff',
-        Range = 'Mythic Harp +1',
-        Ear1 = 'Merman\'s Earring',
-        Ear2 = 'Merman\'s Earring',
-        Head = 'displaced',
-        Body = 'Royal Cloak',
-        Hands = 'Merman\'s Bangles',
-        Ring1 = 'Merman\'s Ring',
-        Ring2 = 'Sattva Ring',
-        Back = 'Hexerei Cape',
-        Waist = 'Scouter\'s Rope',
-        Legs = 'Dst. Subligar +1',
-        Feet = 'Dst. Leggings +1',
-        Neck = 'Jeweled Collar',
     },
     FireRes = {
         Main = 'Neptune\'s Staff',
@@ -101,61 +81,37 @@ local sets = {
     },
     Precast = {
        Ear2 = 'Loquac. Earring',
-       Feet = 'Rostrum Pumps',
     },
     Precast_Songs = {
-        Main = 'Tutelary',
-        Sub = 'She-slime Shield',
-        Ammo = 'Happy Egg',
+        Main = 'Mandau',
+		Sub = 'Genbu\'s Shield',
         Head = 'Genbu\'s Kabuto',
-        Neck = 'Bird Whistle',
-        Ear1 = 'Pigeon Earring',
+        Neck = 'Evasion Torque',
+        Ear1 = 'Cassie Earring',
         Ear2 = 'Loquac. Earring',
-        Body = 'Sha\'ir Manteel',
+        Body = 'Sheikh Manteel',
         Hands = 'Seiryu\'s Kote',
         Ring1 = 'Minstrel\'s Ring',
         Ring2 = 'Bomb Queen Ring',
         Back = 'Gigant Mantle',
         Waist = 'Powerful Rope',
-        Legs = 'Dusk Trousers',
-        Feet = 'Rostrum Pumps',
+        Legs = 'Brd. Cannions +1',
+        Feet = 'Root Sabots',
     },
     Casting = { -- Default Casting Equipment when using Idle sets
-        Main = 'Terra\'s Staff',
-        Range = 'Mythic Harp +1',
-        Neck = 'Jeweled Collar',
-        Ear1 = 'Merman\'s Earring',
-        Ear2 = 'Merman\'s Earring',
-        Head = 'Darksteel Cap +1',
-        Body = 'Dst. Harness +1',
-        Hands = 'Dst. Mittens +1',
-        Ring1 = 'Merman\'s Ring',
-        Ring2 = 'Sattva Ring',
-        Back = 'Umbra Cape',
-        Waist = 'Powerful Rope',
-        Legs = 'Dst. Subligar +1',
-        Feet = 'Dst. Leggings +1',
     },
-    SIRD = { -- 102% to Cap, used on Stoneskin, Blink, Aquaveil and Utsusemi casts
-        Neck = 'Willpower Torque',
-        Waist = 'Druid\'s Rope',
-        Feet = 'Mountain Gaiters',
+    SIRD = { -- Used on Stoneskin, Blink, Aquaveil and Utsusemi casts
     },
     Haste = { -- Used only on Haste, Refresh, Blink and Utsusemi casts
-        Range = 'Angel Lyre',
-        Body = 'Sha\'ir Manteel',
-        Ear1 = 'Magnetic Earring',
-        Hands = 'Dusk Gloves +1',
-        Waist = 'Swift Belt',
+        Body = 'Sheikh Manteel',
+        Hands = 'Dusk Gloves',
+        Waist = 'Sonic Belt',
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Dusk Ledelsens',
     },
     ConserveMP = {
-        Ear2 = 'Magnetic Earring',
     },
 
     Sing_Default = {
-        Range = 'Gjallarhorn',
         Head = 'Brd. Roundlet +1',
         Neck = 'Wind Torque',
         Ear1 = 'Singing Earring',
@@ -169,37 +125,32 @@ local sets = {
         Body = 'Minstrel\'s Coat',
     },
     Sing_Debuff = {
-        Body = 'Mahatma Hpl.',
+        Body = 'Errant Hpl.',
         Ring1 = 'Heavens Ring',
         Ring2 = 'Heavens Ring',
-        Waist = 'Corsette +1',
-        Feet = 'Sha\'ir Crackows',
+        Waist = 'Gleeman\'s Belt',
+        Feet = 'Sheikh Crackows',
     },
-
+	
     Sing_Ballad_Large = {
-        Range = 'Gjallarhorn',
-        Body = 'Sha\'ir Manteel',
-        Hands = 'Sheikh Gages',
-        Waist = 'Swift Belt',
-        Legs = 'Byakko\'s Haidate',
-        Feet = 'Dusk Ledelsens',
+        Range = 'Nursemaid\'s Harp',
     },
     Sing_Ballad_Small = {
         Range = 'Gjallarhorn',
-        Body = 'Sha\'ir Manteel',
-        Hands = 'Sheikh Gages',
-        Waist = 'Swift Belt',
+        Ear2 = 'Loquac. Earring',
+        Body = 'Sheikh Manteel',
+		Hands = 'Sheikh Gages',
+        Waist = 'Sonic Belt',
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Dusk Ledelsens',
+        Feet = 'Rostrum Pumps',
     },
     Sing_Paeon = {
-        Range = 'Ebony Harp +1',
-        Neck = 'String Torque',
+        Range = 'Gjallarhorn',
     },
     Sing_Mazurka = {
         Range = 'Gjallarhorn',
     },
-     Sing_Minuet = {
+    Sing_Minuet = {
         Range = 'Gjallarhorn',
     },
     Sing_March = {
@@ -220,14 +171,13 @@ local sets = {
         Range = 'Nursemaid\'s Harp',
         Main = 'Apollo\'s Staff',
         Neck = 'String Torque',
-        Legs = 'Mahatma Slops',
     },
     Sing_HordeLullaby_Small = {
         Range = 'Gjallarhorn',
         Main = 'Apollo\'s Staff',
     },
     Sing_SleepRecast = {
-        Hands = 'Sheikh Gages',
+		Hands = 'Sheikh Gages',
     },
     Sing_FinaleRequiem = {
         Range = 'Gjallarhorn',
@@ -243,53 +193,23 @@ local sets = {
         Range = 'Gjallarhorn',
     },
     Sing_Threnody = {
-        Range = 'Sorrowful Harp',
-        Neck = 'String Torque',
-        Legs = 'Mahatma Slops',
+        Range = 'Gjallarhorn',
     },
     Sing_Hymnus = {
-        Range = 'Angel Lyre',
-        Neck = 'String Torque',
-        Hands = 'Sheikh Gages',
-        Body = 'Sha\'ir Manteel',
-        Waist = 'Swift Belt',
-        Legs = 'Byakko\'s Haidate',
-        Feet = 'Dusk Ledelsens',
+        Range = 'Gjallarhorn',
     },
 
     Cure = {
         Main = 'Apollo\'s Staff',
-        Head = 'Hydra Beret',
-        Neck = 'Justice Badge',
-        Ear1 = 'Magnetic Earring',
-        Ear2 = 'Merman\'s Earring',
-        Body = 'Hydra Doublet',
-        Hands = 'Hydra Gloves',
-        Ring1 = 'Aqua Ring',
-        Ring2 = 'Aqua Ring',
-        Back = 'Errant Cape',
-        Waist = 'Penitent\'s Rope',
-        Legs = 'Hydra Brais',
-        Feet = 'Hydra Gaiters',
     },
     Cursna = {},
 
     Enhancing = {
-        Ear1 = 'Magnetic Earring',
     },
     Stoneskin = {
         Main = 'Chanter\'s Staff',
-        Head = 'Hydra Beret',
         Neck = 'Stone Gorget',
-        Ear1 = 'Magnetic Earring',
-        Ear2 = 'Geist Earring',
-        Body = 'Mahatma hpl.',
-        Hands = 'Devotee\'s Mitts',
-        Ring1 = 'Aqua Ring',
-        Ring2 = 'Aqua Ring',
-        Back = 'Prism Cape',
-        Waist = 'Penitent\'s Rope',
-        Legs = 'Mahatma Slops',
+        Body = 'Errant Hpl.',
         Feet = 'Suzaku\'s Sune-ate',
     },
     Spikes = {},
@@ -310,18 +230,75 @@ local sets = {
     LockSet2 = {},
     LockSet3 = {},
 
-    TP = {},
-    TP_HighAcc = {},
-    TP_NIN = {},
+    TP = {
+		Range = 'Angel Lyre',
+        Head = 'Optical Hat',
+        Neck = 'Love Torque',
+        Ear1 = 'Brutal Earring',
+        Ear2 = 'Suppanomimi',
+        Body = 'Sheikh Manteel',
+        Hands = 'Dusk Gloves',
+        Ring1 = 'Rajas Ring',
+        Ring2 = 'Toreador\'s Ring',
+        Back = 'Forager\'s Mantle',
+        Waist = 'Sprinter\'s Belt',
+        Legs = 'Byakko\'s Haidate',
+        Feet = 'Sheikh Crackows',
+	},
+    TP_HighAcc = {
+		Range = 'Angel Lyre',
+        Head = 'Optical Hat',
+        Neck = 'Love Torque',
+        Ear1 = 'Brutal Earring',
+        Ear2 = 'Suppanomimi',
+        Body = 'Scorpion Harness +1',
+        Hands = 'Dusk Gloves',
+        Ring1 = 'Rajas Ring',
+        Ring2 = 'Toreador\'s Ring',
+        Back = 'Bard\'s Cape',
+        Waist = 'Sprinter\'s Belt',
+        Legs = 'Byakko\'s Haidate',
+        Feet = 'Sheikh Crackows',
+	},
+    TP_NIN = {
+		Range = 'Angel Lyre',
+        Head = 'Optical Hat',
+        Neck = 'Love Torque',
+        Ear1 = 'Brutal Earring',
+        Ear2 = 'Suppanomimi',
+        Body = 'Sheikh Manteel',
+        Hands = 'Dusk Gloves',
+        Ring1 = 'Rajas Ring',
+        Ring2 = 'Toreador\'s Ring',
+        Back = 'Forager\'s Mantle',
+        Waist = 'Sprinter\'s Belt',
+        Legs = 'Byakko\'s Haidate',
+        Feet = 'Sheikh Crackows',
+	},
     TP_Mjollnir_Haste = {},
-    WS = {},
+    WS = {
+        Range = 'Oliphant',
+        Head = 'Voyager Sallet',
+        Neck = 'Love Torque',
+        Ear1 = 'Brutal Earring',
+        Ear2 = 'Suppanomimi',
+        Body = 'Brd. Jstcorps +1',
+        Hands = 'Hecatomb Mittens',
+        Ring1 = 'Rajas Ring',
+        Ring2 = 'Flame Ring',
+        Back = 'Forager\'s Mantle',
+        Waist = 'Warwolf Belt',
+        Legs = 'Chl. Cannions +1',
+        Feet = 'Hct. Leggings',
+	},
     WS_HighAcc = {},
 }
 profile.Sets = sets
 
 profile.SetMacroBook = function()
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1')
-    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 9')
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 3')
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1')
+    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1')
 end
 
 --[[
@@ -358,9 +335,9 @@ end
 
 profile.OnLoad = function()
     gcinclude.SetAlias(T{'sballad','shorde','srecast'})
-    gcdisplay.CreateToggle('SmallBallad', false)
+    gcdisplay.CreateToggle('SmallBallad', true)
     gcdisplay.CreateToggle('SmallHorde', false)
-    gcdisplay.CreateToggle('SleepRecast', false)
+    gcdisplay.CreateToggle('SleepRecast', true)
     gcmage.Load()
     profile.SetMacroBook()
 end
