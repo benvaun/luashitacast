@@ -10,24 +10,24 @@ local light_staff = 'Apollo\'s Staff'
 local dark_staff = 'Pluto\'s Staff'
 
 -- Set to true if you have the obi
-local karin_obi = true
+local karin_obi = false
 local dorin_obi = false
 local suirin_obi = false
 local furin_obi = false
-local hyorin_obi = true
-local rairin_obi = true
-local korin_obi = true
+local hyorin_obi = false
+local rairin_obi = false
+local korin_obi = false
 local anrin_obi = true
 
 -- Set to true if you have the item, and specify which ring or earring slot it will override
 local diabolos_pole = true
-local uggalepih_pendant = true
-local master_casters_bracelets = true
+local uggalepih_pendant = false
+local master_casters_bracelets = false
 local dream_boots = true
 local dream_mittens = true
 local skulkers_cape = false
 local wizards_mantle = false
-local republic_gold_medal = true -- Note: Disabled for BRD
+local republic_gold_medal = false -- Note: Disabled for BRD
 
 local diabolos_earring = false
 local diabolos_earring_slot = 'Ear2'
