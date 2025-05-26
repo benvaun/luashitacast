@@ -1,15 +1,31 @@
 local profile = {}
 
-local fastCastValue = 0.00 -- 0% from gear
+local fastCastValue = 0.05 -- 0% from gear
 
 local ta_rogue_armlets = true
 
 local sets = {
-    Idle = {},
+    Idle = {
+		Range = 'Staurobow',
+		Head = 'Homam Zucchetto',
+        Neck = 'Nanaa\'s Charm',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Brutal Earring',
+		Body = 'Rapparee Harness',
+        Hands = 'Assassin\'s Armlets',
+		Ring1 = 'Toreador\'s Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Sprinter\'s Belt',
+		Legs = 'Homam Cosciales',
+		Feet = 'Trotter Boots',
+	},
     IdleALT = {},
     Resting = {},
     Town = {},
-    Movement = {},
+    Movement = {
+		Feet = 'Trotter Boots',
+	},
 
     DT = {},
     MDT = { -- Shell IV provides 23% MDT
@@ -20,42 +36,230 @@ local sets = {
     EarthRes = {},
     WindRes = {},
     WaterRes = {},
-    Evasion = {},
+    Evasion = {
+		Head = 'Optical Hat',
+		Neck = 'Evasion Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Musical Earring',
+		Body = 'Scorpion Harness +1',
+		Hands = 'War Gloves +1',
+		Back = 'Boxer\'s Mantle',
+		Waist = 'Scouter\'s Rope',
+		Legs = 'Raven Hose',
+		Feet = 'Dance Shoes +1',
+	},
 
     Precast = {},
     SIRD = {
     },
     Haste = { -- Used for Utsusemi cooldown
+		Head = 'Homam Zucchetto',
+		Body = 'Rapparee Harness',
+		Hands = 'Homam Manopolas', -- Dusk Gloves +1
+		Waist = 'Sprinter\'s Belt', -- Sonic Belt
+		Legs = 'Homam Cosciales',
+		Feet = 'Homam Gambieras',
     },
 
     LockSet1 = {},
     LockSet2 = {},
     LockSet3 = {},
 
-    TP_LowAcc = {},
-    TP_HighAcc = {},
-    TP_NIN = {},
+    TP_LowAcc = {
+		Head = 'Homam Zucchetto',
+		Neck = 'Love Torque',
+		Ear1 = 'Stealth Earring',
+		Ear2 = 'Brutal Earring',
+		Body = 'Rapparee Harness',
+		Hands = 'Homam Manopolas', -- Dusk Gloves +1
+		Ring1 = 'Toreador\'s Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Sprinter\'s Belt', -- Sonic Belt
+		Legs = 'Homam Cosciales',
+		Feet = 'Homam Gambieras',
+	},
+    TP_HighAcc = {
+		Head = 'Homam Zucchetto',
+		Neck = 'Love Torque',
+		Ear1 = 'Stealth Earring',
+		Ear2 = 'Brutal Earring',
+		Body = 'Homam Corazza',
+		Hands = 'Homam Manopolas', -- Dusk Gloves +1
+		Ring1 = 'Toreador\'s Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Sprinter\'s Belt', -- Sonic Belt
+		Legs = 'Homam Cosciales',
+		Feet = 'Homam Gambieras',
+	},
+    TP_NIN = {
+		Ear1 = 'Stealth Earring',
+	},
+    TP_OCLUB = {
+		Ear2 = 'Hollow Earring',
+    },
     TP_Mjollnir_Haste = {},
 
-    WS = {},
-    WS_HighAcc = {},
+    WS = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Brutal Earring',
+		Body = 'Hecatomb Harness', -- Hecatomb Harness +1
+		Hands = 'Hecatomb Mittens', -- Hecatomb Mittens +1
+		Ring1 = 'Flame Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers',
+		Feet = 'Hct. Leggings', -- Hct. Leggings +1
+	},
+    WS_HighAcc = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Merman\'s Earring',
+		Body = 'Hecatomb Harness', -- Hecatomb Harness +1
+		Hands = 'Hecatomb Mittens', -- Hecatomb Mittens +1
+		Ring1 = 'Flame Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers',
+		Feet = 'Hct. Leggings', -- Hct. Leggings +1
+	},
+    WS_Evisceration = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Merman\'s Earring',
+		Body = 'Hecatomb Harness', -- Hecatomb Harness +1
+		Hands = 'Hecatomb Mittens', -- Hecatomb Mittens +1
+		Ring1 = 'Flame Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers',
+		Feet = 'Hct. Leggings', -- Hct. Leggings +1
+	},
+    WS_SharkBite = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Merman\'s Earring',
+		Body = 'Hecatomb Harness', -- Hecatomb Harness +1
+		Hands = 'Hecatomb Mittens', -- Hecatomb Mittens +1
+		Ring1 = 'Flame Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers',
+		Feet = 'Hct. Leggings', -- Hct. Leggings +1
+	},
+    WS_MercyStroke = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Soil Gorget',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Merman\'s Earring',
+		Body = 'Hecatomb Harness', -- Hecatomb Harness +1
+		Hands = 'Hecatomb Mittens', -- Hecatomb Mittens +1
+		Ring1 = 'Flame Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers',
+		Feet = 'Hct. Leggings', -- Hct. Leggings +1
+	},
 
-    WS_Evisceration = {},
-    WS_SharkBite = {},
+    SA = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Pixie Earring',
+		Body = 'Dragon Harness', -- Dragon Harness +1
+		Hands = 'Homam Manopolas',
+		Ring1 = 'Thunder Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers', -- Dusk Trousers +1
+		Feet = 'Homam Gambieras',
+	},
+    TA = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Merman\'s Earring',
+		Body = 'Dragon Harness', -- Dragon Harness +1
+		Hands = 'Homam Manopolas',
+		Ring1 = 'Thunder Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers', -- Dusk Trousers +1
+		Feet = 'Homam Gambieras',
+	},
+    SATA = {
+		Head = 'Voyager Sallet', -- Hecatomb Cap +1
+		Neck = 'Love Torque',
+		Ear1 = 'Suppanomimi',
+		Ear2 = 'Pixie Earring',
+		Body = 'Dragon Harness', -- Dragon Harness +1
+		Hands = 'Homam Manopolas',
+		Ring1 = 'Thunder Ring',
+		Ring2 = 'Rajas Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers', -- Dusk Trousers +1
+		Feet = 'Homam Gambieras',
+	},
 
-    SA = {},
-    TA = {},
-    SATA = {},
+    Flee = {
+		Feet = 'Rogue\'s Poulaines',
+	},
+    Hide = {
+		Body = 'Rogue\'s Vest'
+	},
+    Steal = {
+        Head = 'Rogue\'s Bonnet',
+		Neck = 'Rabbit Charm',
+        Hands = 'Thief\'s Kote',
+		Ring1 = 'Rogue\'s Ring',
+        Legs = 'Assassin\'s Culottes',
+        Feet = 'Rogue\'s Poulaines',
+	},
+    Mug = {
+        Head = 'Assassin\'s Bonnet',
+	},
 
-    Flee = {},
-    Hide = {},
-    Steal = {},
-    Mug = {},
+    TH = {
+        Neck = 'Nanaa\'s Charm',
+        Hands = 'Assassin\'s Armlets',
+	},
 
-    TH = {},
-
-    Ranged = {},
-    Ranged_INT = {},
+    Ranged = {
+		Head = 'Optical Hat',
+        Neck = 'Nanaa\'s Charm',
+		Body = 'Dragon Harness', -- Dragon Harness +1
+        Hands = 'Assassin\'s Armlets',
+		Ring1 = 'Merman\'s Ring',
+		Ring2 = 'Merman\'s Ring',
+		Back = 'Forager\'s Mantle',
+		Waist = 'Warwolf Belt',
+		Legs = 'Dusk Trousers', -- Dusk Trousers +1
+		Feet = 'Homam Gambieras',},
+    Ranged_INT = {
+		Head = 'Rogue\'s Bonnet',
+        Neck = 'Nanaa\'s Charm',
+		Body = 'Magna Jerkin',
+        Hands = 'Assassin\'s Armlets',
+		Ring1 = 'Snow Ring',
+		Ring2 = 'Snow Ring',
+		Waist = 'Forest Rope',
+		Legs = 'Dusk Trousers', -- Dusk Trousers +1
+		Feet = 'Mgn. M Ledelsens',
+	},
 }
 profile.Sets = sets
 
@@ -141,8 +345,9 @@ profile.HandleWeaponskill = function()
 end
 
 profile.OnLoad = function()
-    gcinclude.SetAlias(T{'th'})
+    gcinclude.SetAlias(T{'th', 'oclub'})
     gcdisplay.CreateCycle('TH', {[1] = 'auto', [2] = 'on', [3] = 'off'})
+    gcdisplay.CreateToggle('OClub', false)
     gcmelee.Load()
     profile.SetMacroBook()
     profile.WatchTreasureHunter()
@@ -150,7 +355,7 @@ end
 
 profile.OnUnload = function()
     gcmelee.Unload()
-    gcinclude.ClearAlias(T{'th'})
+    gcinclude.ClearAlias(T{'th', 'oclub'})
     ashita.events.unregister('packet_in', 'watch_treasure_hunter');
 end
 
@@ -158,6 +363,9 @@ profile.HandleCommand = function(args)
     if (args[1] == 'th') then
         gcdisplay.AdvanceCycle('TH')
         gcinclude.Message('TH', gcdisplay.GetCycle('TH'))
+    elseif (args[1] == 'oclub') then
+        gcdisplay.AdvanceToggle('OClub')
+        gcinclude.Message('OClub', gcdisplay.GetToggle('OClub'))
     else
         gcmelee.DoCommands(args)
     end
@@ -173,6 +381,9 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer()
     if (player.SubJob == 'NIN' and player.Status == 'Engaged') then
         gFunc.EquipSet('TP_NIN')
+    end
+    if (gcdisplay.GetToggle('OClub')) then
+        gFunc.EquipSet('TP_OCLUB')
     end
 
     gcmelee.DoDefaultOverride()
