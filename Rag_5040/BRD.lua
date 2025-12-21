@@ -3,35 +3,36 @@ local profile = {}
 local fastCastValue = 0.02 -- Only include Fast Cast e.g. Loquacious Earring, Rostrum Pumps
 local fastCastValueSong = 0.48 -- Only include Song Spellcasting Time e.g. Minstrel's Ring, Sha'ir Manteel
 
-local ninSJMaxMP = nil -- The Max MP you have when /nin in your idle set
-local whmSJMaxMP = 188 -- The Max MP you have when /whm in your idle set
-local rdmSJMaxMP = nil -- The Max MP you have when /rdm in your idle set
-local blmSJMaxMP = nil -- The Max MP you have when /blm in your idle set
+local ninSJMaxMP = 160 -- The Max MP you have when /nin in your idle set
+local whmSJMaxMP = 279 -- The Max MP you have when /whm in your idle set
+local rdmSJMaxMP = 259 -- The Max MP you have when /rdm in your idle set
+local blmSJMaxMP = 298 -- The Max MP you have when /blm in your idle set
 
-local displayheadOnAbility = true
+local minstrels_earring = false
+local minstrels_earring_slot = 'Ear2'
 
 local sets = {
     Idle = {
         Main = 'Terra\'s Staff',
         Range = 'Gjallarhorn',
-        Head = 'Genbu\'s Kabuto',
-        Neck = 'Jeweled Collar',
+        Head = 'Dream Ribbon',
+        Neck = 'Jeweled Collar +1',
         Ear1 = 'Merman\'s Earring',
         Ear2 = 'Merman\'s Earring',
-        Body = 'Dalmatica',
+        Body = { Name = 'Dalmatica', Priority = 100 },
         Hands = 'Merman\'s Bangles',
         Ring1 = 'Merman\'s Ring',
         Ring2 = 'Merman\'s Ring',
         Back = 'Hexerei Cape',
-        Waist = 'Forest Rope',
-        Legs = 'Brd. Cannions +1',
-        Feet = 'Rostrum Pumps',
+        Waist = { Name = 'Forest Rope', Priority = 100 },
+        Legs = { Name = 'Brd. Cannions +1', Priority = 100 },
+        Feet = { Name = 'Wood M Ledelsens', Priority = 100 },
     },
     IdleALT = {
         Main = 'Terra\'s Staff',
         Range = 'Gjallarhorn',
-        Head = 'Genbu\'s Kabuto',
-        Neck = 'Jeweled Collar',
+        Head = 'Dream Ribbon',
+        Neck = 'Jeweled Collar +1',
         Ear1 = 'Merman\'s Earring',
         Ear2 = 'Merman\'s Earring',
         Body = 'Dalmatica',
@@ -41,17 +42,17 @@ local sets = {
         Back = 'Hexerei Cape',
         Waist = 'Forest Rope',
         Legs = 'Brd. Cannions +1',
-        Feet = 'Rostrum Pumps',
+        Feet = 'Wood M Ledelsens',
     },
     IdleMaxMP = {},
     Resting = {
         Main = 'Pluto\'s Staff',
+        Ear1 = 'Relaxing Earring',
         Body = 'Errant Hpl.',
     },
     Town = {
         Main = 'Mandau',
-		Sub = 'Genbu\'s Shield',
-		Head = 'Protective Specs.',
+		Sub = 'Ageist',
 	},
     Movement = {},
 
@@ -86,16 +87,16 @@ local sets = {
         Main = 'Mandau',
 		Sub = 'Genbu\'s Shield',
         Head = 'Genbu\'s Kabuto',
-        Neck = 'Evasion Torque',
+        Neck = 'Bloodbead Amulet',
         Ear1 = 'Cassie Earring',
-        Ear2 = 'Loquac. Earring',
+        Ear2 = { Name = 'Loquac. Earring', Priority = 100 },
         Body = 'Sheikh Manteel',
         Hands = 'Seiryu\'s Kote',
         Ring1 = 'Minstrel\'s Ring',
         Ring2 = 'Bomb Queen Ring',
         Back = 'Gigant Mantle',
-        Waist = 'Powerful Rope',
-        Legs = 'Brd. Cannions +1',
+        Waist = { Name = 'Forest Rope', Priority = 100 },
+        Legs = { Name = 'Brd. Cannions +1', Priority = 100 },
         Feet = 'Root Sabots',
     },
     Casting = { -- Default Casting Equipment when using Idle sets
@@ -134,21 +135,33 @@ local sets = {
 	
     Sing_Ballad_Large = {
         Range = 'Nursemaid\'s Harp',
+        Ear2 = { Name = 'Loquac. Earring', Priority = 100 },
+        Body = 'Sheikh Manteel',
+		Hands = 'Sheikh Gages',
+        Waist = { Name = 'Forest Rope', Priority = 100 },
+        Legs = 'Byakko\'s Haidate',
+        Feet = { Name = 'Rostrum Pumps', Priority = 100 },
     },
     Sing_Ballad_Small = {
         Range = 'Gjallarhorn',
-        Ear2 = 'Loquac. Earring',
+        Ear2 = { Name = 'Loquac. Earring', Priority = 100 },
         Body = 'Sheikh Manteel',
 		Hands = 'Sheikh Gages',
-        Waist = 'Sonic Belt',
+        Waist = { Name = 'Forest Rope', Priority = 100 },
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Rostrum Pumps',
+        Feet = { Name = 'Rostrum Pumps', Priority = 100 },
     },
     Sing_Paeon = {
         Range = 'Gjallarhorn',
     },
     Sing_Mazurka = {
         Range = 'Gjallarhorn',
+        Ear2 = { Name = 'Loquac. Earring', Priority = 100 },
+        Body = 'Sheikh Manteel',
+		Hands = 'Sheikh Gages',
+        Waist = { Name = 'Forest Rope', Priority = 100 },
+        Legs = 'Byakko\'s Haidate',
+        Feet = { Name = 'Rostrum Pumps', Priority = 100 },
     },
     Sing_Minuet = {
         Range = 'Gjallarhorn',
@@ -179,7 +192,11 @@ local sets = {
     Sing_SleepRecast = {
 		Hands = 'Sheikh Gages',
     },
-    Sing_FinaleRequiem = {
+	Sing_Finale = {
+		Range = 'Shofar +1',
+        Main = 'Apollo\'s Staff',
+	},
+    Sing_Requiem = {
         Range = 'Gjallarhorn',
         Main = 'Apollo\'s Staff',
     },
@@ -243,7 +260,7 @@ local sets = {
         Back = 'Forager\'s Mantle',
         Waist = 'Sprinter\'s Belt',
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Sheikh Crackows',
+        Feet = 'Dusk Ledelsens +1',
 	},
     TP_HighAcc = {
 		Range = 'Angel Lyre',
@@ -258,7 +275,7 @@ local sets = {
         Back = 'Bard\'s Cape',
         Waist = 'Sprinter\'s Belt',
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Sheikh Crackows',
+        Feet = 'Dusk Ledelsens +1',
 	},
     TP_NIN = {
 		Range = 'Angel Lyre',
@@ -273,7 +290,7 @@ local sets = {
         Back = 'Forager\'s Mantle',
         Waist = 'Sprinter\'s Belt',
         Legs = 'Byakko\'s Haidate',
-        Feet = 'Sheikh Crackows',
+        Feet = 'Dusk Ledelsens +1',
 	},
     TP_Mjollnir_Haste = {},
     WS = {
@@ -283,7 +300,7 @@ local sets = {
         Ear1 = 'Brutal Earring',
         Ear2 = 'Suppanomimi',
         Body = 'Brd. Jstcorps +1',
-        Hands = 'Hecatomb Mittens',
+        Hands = 'Hct. Mittens +1',
         Ring1 = 'Rajas Ring',
         Ring2 = 'Flame Ring',
         Back = 'Forager\'s Mantle',
@@ -412,17 +429,21 @@ profile.HandleMidcast = function()
             if (gcdisplay.GetToggle('SleepRecast')) then
                 gFunc.EquipSet(sets.Sing_SleepRecast)
             end
-        elseif (action.Name == 'Magic Finale') or string.match(action.Name, 'Requiem') then
+        elseif (action.Name == 'Magic Finale') then
             gFunc.EquipSet(sets.Sing_Debuff)
-            gFunc.EquipSet(sets.Sing_FinaleRequiem)
+            gFunc.EquipSet(sets.Sing_Finale)
+		elseif string.match(action.Name, 'Requiem') then
+            gFunc.EquipSet(sets.Sing_Debuff)
+            gFunc.EquipSet(sets.Sing_Requiem)
         elseif string.match(action.Name, 'Carol') then
             gFunc.EquipSet(sets.Sing_Buff)
             gFunc.EquipSet(sets.Sing_Carol)
         elseif string.match(action.Name, 'Ballad') then
             gFunc.EquipSet(sets.Sing_Buff)
-            gFunc.EquipSet(sets.Sing_Ballad_Large)
             if (gcdisplay.GetToggle('SmallBallad')) then
                 gFunc.EquipSet(sets.Sing_Ballad_Small)
+			else
+				gFunc.EquipSet(sets.Sing_Ballad_Large)
             end
         elseif string.match(action.Name, 'Minuet') then
             gFunc.EquipSet(sets.Sing_Buff)
